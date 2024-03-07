@@ -1,0 +1,2 @@
+jar를 사용하면
+/resources/static/index.html을 welcome 페이지로 처리해줌
