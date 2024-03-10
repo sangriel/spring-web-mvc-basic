@@ -1,2 +1,5 @@
 jar를 사용하면
 /resources/static/index.html을 welcome 페이지로 처리해줌
+
+jar로 내장 톰캣만 쓸때
+webapp경로를 쓸수 없기 때문에 static패키지 하위에다가 적정 resource들을 배치하고 쓰면 됨
