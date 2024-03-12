@@ -17,7 +17,7 @@ import java.io.IOException;
 public class ResponseBodyController {
 
     //@ResponseBody를 class 레벨에 달면 함수마다 지정해놓을 필요는 없음
-    
+
 
     @GetMapping("/response-body-string-v1")
     public void responseBodyStringV1(HttpServletResponse response) throws IOException {

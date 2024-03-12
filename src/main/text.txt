@@ -5,3 +5,30 @@ jar로 내장 톰캣만 쓸때
 webapp경로를 쓸수 없기 때문에 static패키지 하위에다가 적정 resource들을 배치하고 쓰면 됨
 
 
+//responseBody 사용원리
+웹브라우저(localhost:8080/hello-api) -> 내장 톰캣 서버 -> helloController ->
+@ResponseBody return:hello(name: Spring) -> HttpMessageConverter(viewResolver대신에 동작함) ->
+{name:spring}을 웹브라우저에 전달
+
+
+//ArgumentResolver
+매개변수를 뭔가 처리해주는 것
+어노테이션 기반의 controller를 쓸수 있게 해주는 것
+
+DispatcherServlet -> RequestMapping(ControllerAdapter) -> ArgumentResolver -> controller
+-> ReturnValueHandler(ModelAndView, @ResponseBody, HttpEntity등) -> RequestMapping (필요할때까지 반복)
+
+어노테이션 기반 컨트롤러를 처리하는 RequestMappingHandlerAdaptor는 ArgumentResolver를 호출해서
+컨트롤러가가 필요로 하는 다양한 파라미터의 값을 생성, 그리고 파라미터의 값이 모두 준비되면 컨트롤러 호출후 값을 넘겨줌
+
+ArgumentResolver를 직접 채택해서 확장하는 것도 가능, WebMvcConfigurer를 상속받아서 bean으로 등록하면 됨
+
+
+
+//결국 HTTPMessagConverter는 어디쯤에서 사용이 되는가?
+
+요청의 경우 @RequestBody, HttpEntity등을 처리하는 각 ArgumentResolver가 HTTPMessageConverter를
+사용해서 필요한 객체를 사용함
+
+응답의 경우 @RequestBody와 HttpEntity를 처리하는 ReturnValueHandler가 있어서 여기에서 HttpMessageConverter가
+사용됨
