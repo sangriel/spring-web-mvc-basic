@@ -57,7 +57,7 @@ public class RequestBodyJsonController {
     @PostMapping("/request-body-json-v5")
     public HelloData requestBodyJsonV5(@RequestBody HelloData helloData) {
         log.info("helloData={}",helloData);
-        //HttpMessageConverter가 객체를 알아서 JSON으로 해서 내보냄
+        //HttpMessageConverter가 객체를 알아서 JSON으로 해서 내보
         return helloData;
     }
 
